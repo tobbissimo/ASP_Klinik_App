@@ -1,0 +1,84 @@
+﻿@model IEnumerable<KlinikApp_WebApplication3.Models.Patient>
+
+@*partieller View für die Patientliste in index.cshtml*@
+<div id="patientTable">
+    <table class="table">
+        <tr>
+            <th>
+                @Ajax.ActionLink("Lastname", "PatientSearch", "Patients", new { sortOrder = ViewBag.LastnameSortParm},
+                new AjaxOptions {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "patientTable"
+                })
+                @*@Html.DisplayNameFor(model => model.P_Lastname)*@
+            <th>
+                @Ajax.ActionLink("Firstname", "PatientSearch", "Patients", new { sortOrder = ViewBag.FirstnameSortParm },
+                new AjaxOptions
+                     {
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "patientTable"
+                })
+                @*@Html.ActionLink("Firstname", "PatientSearch", new { sortOrder = ViewBag.FirstnameSortParm })*@
+                @*@Html.DisplayNameFor(model => model.P_Firstname)*@
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P_Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P_Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.P_Plz)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Bundesland.B_Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NrOfExams)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.P_Lastname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.P_Firstname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.P_Birthday)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.P_Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.P_Plz)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Bundesland.B_Name)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.NrOfExams)
+        </td>*@
+        <td>
+            @{
+                foreach (var exam in item.Examinations)
+                {
+                    @exam.Examtype.Exty_Name <br />
+                }
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Examinations", "Index", "Examinations", new { id = item.Pat_Id.ToString(), lastname = item.P_Lastname, type = "patient" }, null) |
+            @Html.ActionLink("Edit", "Edit", new { id = item.Pat_Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Pat_Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Pat_Id })
+        </td>
+    </tr>
+        }
+
+    </table>
+</div>

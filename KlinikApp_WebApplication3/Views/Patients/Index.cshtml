@@ -1,0 +1,47 @@
+﻿@model IEnumerable<KlinikApp_WebApplication3.Models.Patient>
+
+@{
+    ViewBag.Title = "Index";
+}
+<h2>Patients</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+
+@using (Ajax.BeginForm("PatientSearch", "Patients",
+           new AjaxOptions
+           {
+               InsertionMode = InsertionMode.Replace,
+               HttpMethod = "POST",
+
+               UpdateTargetId = "patientTable",
+           }))
+{
+    
+    <input id="searchField" type="text" name="searchPatient" value="@ViewBag.patientsearch" placeholder="Search" />
+    <input type="submit" value="Search" />
+}
+
+
+@Html.Partial("_patients", Model)
+
+
+@section Scripts {
+
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+}
+
+@*<script>
+    $("#searchField").keyup(function () {
+        var searchText = $("#searchField").val();
+        $.ajax({
+            type: "POST",
+            url: "Patients/PatientSearch",
+
+            UpdateTargetId = "patientTable"
+        });
+
+    });
+</script>*@

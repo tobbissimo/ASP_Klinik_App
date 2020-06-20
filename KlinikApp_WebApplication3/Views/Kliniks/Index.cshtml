@@ -1,0 +1,106 @@
+﻿@model IEnumerable<KlinikApp_WebApplication3.Models.Klinik>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div style="width:90%; margin:0 auto;">
+    <table id="myTable">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.K_Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.K_Plz)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.K_Ort)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bundesland.B_Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+<style>
+    tr.even {
+        background-color: #F5F5F5 !important;
+    }
+</style>
+@* Load datatable css *@
+<link href="//cdn.datatables.net/1.10.9/css/jquery.dataTables.min.css" rel="stylesheet" />
+<link href="//cdn.datatables.net/buttons/1.6.2/css/buttons.dataTables.min.css" rel="stylesheet" />
+@* Load datatable js *@
+@section Scripts{
+    <script src="//cdn.datatables.net/1.10.9/js/jquery.dataTables.min.js"></script>
+    <script src="//cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#myTable').DataTable({
+                "ajax": {
+                    "url": "/Kliniks/Loaddata",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+                "columns": [
+                    { "data": "address", "autoWidth": true },
+                    { "data": "plz", "autoWidth": true },
+                    { "data": "ort", "autoWidth": true },
+                    { "data": "bland", "autoWidth": true },
+                    //{
+                    //    mRender: function (data, type, row) {
+                    //        return '<a href="/Employees/Index/" class="table-edit" data-id="Id" data="klinik=K1" >Employees</a>'
+                    //    }
+                    // }
+                ]
+            });
+        });
+        //row.data["K_Id"]
+    </script>
+}
+@*<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.K_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.K_Plz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.K_Ort)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bundesland.B_Name)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.K_Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.K_Plz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.K_Ort)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bundesland.B_Name)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.K_Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.K_Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.K_Id })
+            </td>
+        </tr>
+    }
+
+</table>*@

@@ -1,0 +1,82 @@
+﻿@model KlinikApp_WebApplication3.Models.Employee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Employee</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp_Lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp_Lastname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp_Firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp_Firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp_Birthday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp_Birthday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp_Address)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp_Plz)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp_Plz)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Emp_Salary)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Emp_Salary)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Bundesland.B_Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Bundesland.B_Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Klinik.K_Address)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Klinik.K_Address)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Emp_Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

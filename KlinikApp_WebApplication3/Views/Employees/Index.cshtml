@@ -1,0 +1,92 @@
+﻿@model IEnumerable<KlinikApp_WebApplication3.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Employees</h2>
+
+<p>
+    @if ((int)Session["emp_id"] == 1)
+    {
+        @Html.ActionLink("Create New", "Create")
+    }
+</p>
+<form class="form-inline">
+    <div class="form-group">
+        @*<label for="searchEmployee">Search:</label>*@
+        <input name="searchEmployee" id="searchEmployee" class="form-control" , placeholder="Search">
+    </div>
+    <input type="submit" value="Search" class="btn btn-default" />
+</form>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Emp_Id)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Emp_Lastname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Emp_Firstname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Emp_Birthday)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Emp_Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Emp_Plz)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Bundesland.B_Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Klinik.K_Address)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Lastname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Firstname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Birthday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Emp_Plz)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Bundesland.B_Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Klinik.K_Address)
+            </td>
+            <td>
+                @Html.ActionLink("Examinations", "Index", "Examinations", new { id = item.Emp_Id.ToString(), lastname = item.Emp_Lastname, type = "employee" }, null)
+                @if ((int)Session["emp_id"] == 1)
+                {
+
+                    @Html.Raw(" | ") @Html.ActionLink("Edit", "Edit", new { id = item.Emp_Id }) @Html.Raw(" | ");
+                    @Html.ActionLink("Details", "Details", new { id = item.Emp_Id }) @Html.Raw(" | ");
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Emp_Id })
+                }
+            </td>
+        </tr>
+    }
+
+</table>

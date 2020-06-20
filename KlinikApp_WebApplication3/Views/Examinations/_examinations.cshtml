@@ -1,0 +1,60 @@
+﻿@model IEnumerable<KlinikApp_WebApplication3.Models.Examination>
+
+    <div id="examinations">
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ex_Id)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ex_Date)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ex_Employee)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Examtype.Exty_Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Klinik.K_Address)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Ex_Patient)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ex_Id)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Ex_Date)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Employee.Emp_Lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Examtype.Exty_Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Klinik.K_Address)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Patient.P_Lastname)
+                    </td>
+                    <td>
+                        @if ((int)Session["emp_id"] == item.Ex_Employee || (int)Session["emp_id"] == 1)
+                        {
+                            @Html.ActionLink("Edit", "Edit", new { id = item.Ex_Id }) @Html.Raw(" | ")
+                            @Html.ActionLink("Details", "Details", new { id = item.Ex_Id }) @Html.Raw(" | ")
+                            @Html.ActionLink("Delete", "Delete", new { id = item.Ex_Id })
+                        }
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
